@@ -8,48 +8,20 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-	export default{
-		setup(){
-			const counter = ref(0)
 
-			const increaseCounter = () =>{
-				counter.value++;
-			}
-			
-			const decreaseCounter = () =>{
-				counter.value--;
-			}
+const counter = ref(0)
 
-			return {
-				counter,
-				increaseCounter,
-				decreaseCounter
-			}
-		}
-	}
-</script>
-
-<!-- OptionsApi script section -->
-<!-- <script>
-export default{
-	data(){
-		return{
-			counter: 0
-		}
-	},
-
-	methods: {
-		increaseCounter(){
-			this.counter++;
-		},
-		decreaseCounter(){
-			this.counter--;
-		}
-	}
+const increaseCounter = () =>{
+	counter.value++;
 }
-</script> -->
+
+const decreaseCounter = () =>{
+	counter.value--;
+}
+
+</script>
 
 <style scoped>
 .home{
