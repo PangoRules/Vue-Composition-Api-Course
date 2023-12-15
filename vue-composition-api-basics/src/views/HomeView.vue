@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, watch, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, onActivated, onDeactivated } from 'vue'
+import { reactive, computed, watch, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, onActivated, onDeactivated, onBeforeUpdate, onUpdated } from 'vue'
 
 const appTitle = 'My Amazing Counter App';
 
@@ -68,6 +68,14 @@ onActivated(() => {
 onDeactivated(() => {
 	console.log("onDeactivated");
 });
+
+onBeforeUpdate(() => {
+	console.log("onBeforeUpdate");
+});
+
+onUpdated(() => {
+	console.log("onUpdated");
+})
 
 </script>
 
