@@ -21,6 +21,7 @@
 
 <script setup>
 import { reactive, computed, watch, onMounted, ref } from 'vue'
+import { vAutofocus } from '@/directives/vAutofocus'
 
 /**
  * App title
@@ -58,16 +59,6 @@ import { reactive, computed, watch, onMounted, ref } from 'vue'
 	const decreaseCounter = amount =>{
 		counterData.count -= amount;
 	}
-
-/**
- * Directives (all hooks can be used within)
- */
-
-	const vAutofocus = {
-		mounted: (el) =>{
-			el.focus();
-		}
-	} // v-autofocus
 
 </script>
 
