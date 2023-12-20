@@ -14,68 +14,51 @@
 
 		<div class="edit">
 			<h4>Edit counter title:</h4>
-			<input v-model="counterData.title" type="text">
+			<input v-model="counterData.title" type="text" v-autofocus>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { reactive, computed, watch, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, onActivated, onDeactivated, onBeforeUpdate, onUpdated } from 'vue'
+import { reactive, computed, watch, onMounted, ref } from 'vue'
+import { vAutofocus } from '@/directives/vAutofocus'
 
-const appTitle = 'My Amazing Counter App';
+/**
+ * App title
+ */
 
-const counterData = reactive({
-	count: 0,
-	title: 'My Counter:'
-});
+	const appTitle = ref();
 
-watch(() => counterData.count, (newCount, oldCount) =>{
-	if(newCount === 20) alert('Way to go made it to 20.');
-});
+	onMounted(() => {
+		// console.log('On mountedHook');
+		appTitle.value = 'My Amazing Counter App(edit)';
+	});
 
-const oddOrEven = computed(() => {
-	return counterData.count % 2 === 0 ? 'even' : 'odd';
-});
+/**
+ * Counter 
+ */
 
-const increaseCounter = (amount, event) =>{
-	// console.log(event);
-	counterData.count += amount;
-}
+	const counterData = reactive({
+		count: 0,
+		title: 'My Counter:'
+	});
 
-const decreaseCounter = amount =>{
-	counterData.count -= amount;
-}
-onBeforeMount(() => {
-	console.log("onBeforeMount");
-});
+	watch(() => counterData.count, (newCount, oldCount) =>{
+		if(newCount === 20) alert('Way to go made it to 20.');
+	});
 
-onMounted(() => {
-	console.log("onMounted");
-});
+	const oddOrEven = computed(() => {
+		return counterData.count % 2 === 0 ? 'even' : 'odd';
+	});
 
-onBeforeUnmount(() => {
-	console.log("onBeforeUnmount");
-});
+	const increaseCounter = (amount, event) =>{
+		// console.log(event);
+		counterData.count += amount;
+	}
 
-onUnmounted(() => {
-	console.log("onUnmounted");
-});
-
-onActivated(() => {
-	console.log("onActivated");
-});
-
-onDeactivated(() => {
-	console.log("onDeactivated");
-});
-
-onBeforeUpdate(() => {
-	console.log("onBeforeUpdate");
-});
-
-onUpdated(() => {
-	console.log("onUpdated");
-})
+	const decreaseCounter = amount =>{
+		counterData.count -= amount;
+	}
 
 </script>
 
