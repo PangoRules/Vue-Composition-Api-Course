@@ -1,14 +1,14 @@
 import { reactive, computed, watch, nextTick } from 'vue'
 
+const counterData = reactive({
+	count: 0,
+	title: 'My Counter:'
+});
+
 export function useCounter(){
 	/**
  * Counter 
  */
-	const counterData = reactive({
-		count: 0,
-		title: 'My Counter:'
-	});
-
 	watch(() => counterData.count, (newCount, oldCount) =>{
 		if(newCount === 20) alert('Way to go made it to 20.');
 	});
