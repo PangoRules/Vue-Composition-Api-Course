@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, watch, onMounted, ref } from 'vue'
+import { reactive, computed, watch, onMounted, ref, nextTick } from 'vue'
 import { vAutofocus } from '@/directives/vAutofocus'
 
 /**
@@ -54,9 +54,12 @@ import { vAutofocus } from '@/directives/vAutofocus'
 		return counterData.count % 2 === 0 ? 'even' : 'odd';
 	});
 
-	const increaseCounter = (amount, event) =>{
+	const increaseCounter = async (amount, event) =>{
 		// console.log(event);
 		counterData.count += amount;
+		await nextTick();
+		console.log("Do something when counter has updated in the log");
+		
 	}
 
 	const decreaseCounter = amount =>{
