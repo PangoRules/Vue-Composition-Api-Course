@@ -6,7 +6,6 @@
 	<Modal 
 		v-model="showModal"
 		titleProp="My modal title (via prop)"
-		@hideModal="showModal = false"
 		>
 		<template #title>
 			This is a modal!
