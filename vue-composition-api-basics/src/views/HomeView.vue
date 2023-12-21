@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<h2>{{ appTitle }}</h2>
+		<h2 ref="appTitleRef">{{ appTitle }}</h2>
 		<h3>{{ counterData.title }}</h3>
 		<div>
 			<button @click="decreaseCounter(2)" class="btn">--</button>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, watch, onMounted, ref } from 'vue'
+import { reactive, computed, watch, onMounted, ref, nextTick } from 'vue'
 import { vAutofocus } from '@/directives/vAutofocus'
 
 /**
@@ -29,9 +29,12 @@ import { vAutofocus } from '@/directives/vAutofocus'
 
 	const appTitle = ref();
 
+	const appTitleRef = ref(null);
+
 	onMounted(() => {
 		// console.log('On mountedHook');
 		appTitle.value = 'My Amazing Counter App(edit)';
+		console.log(`The app title is ${appTitleRef.value.offsetWidth} px wide!`);
 	});
 
 /**
@@ -51,9 +54,12 @@ import { vAutofocus } from '@/directives/vAutofocus'
 		return counterData.count % 2 === 0 ? 'even' : 'odd';
 	});
 
-	const increaseCounter = (amount, event) =>{
+	const increaseCounter = async (amount, event) =>{
 		// console.log(event);
 		counterData.count += amount;
+		await nextTick();
+		console.log("Do something when counter has updated in the log");
+		
 	}
 
 	const decreaseCounter = amount =>{
