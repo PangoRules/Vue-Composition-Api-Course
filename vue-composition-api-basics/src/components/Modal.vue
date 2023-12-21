@@ -2,18 +2,37 @@
 	<Teleport to=".modal-container">
 			<div class="modal">
 				<h1><slot name="title"></slot></h1>
+				<h2>{{ titleProp }}</h2>
 				<slot></slot>
-				<button>Hide modal</button>
+				<button @click="hideModal">Hide modal</button>
 			</div>
 	</Teleport>
 </template>
 
 <script setup>
-import { useSlots } from 'vue';
 
-const slots = useSlots();
+/**
+ * Props
+ */
+const props = defineProps({
+	titleProp:{
+		type: String,
+		default: 'No title specified'
+	}
+});
 
-console.log(slots.title());
+/**
+ * Emits
+ */
+const emit = defineEmits(['hideModal']);
+
+/**
+ * Hide modal
+ */
+const hideModal = () =>{
+	emit('hideModal');
+}
+
 </script>
 
 <style scoped>

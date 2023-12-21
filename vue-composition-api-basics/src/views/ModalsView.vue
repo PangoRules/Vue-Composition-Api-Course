@@ -3,7 +3,11 @@
 		<h1>Modals</h1>
 		<button @click="showModal = true">Show modal</button>
 	</div>
-	<Modal v-if="showModal">
+	<Modal 
+		v-if="showModal"
+		titleProp="My modal title (via prop)"
+		@hideModal="showModal = false"
+		>
 		<template #title>
 			This is a modal!
 		</template>
@@ -12,6 +16,7 @@
 </template>
 
 <script setup>
+
 /**
  * Imports
  */
@@ -22,4 +27,5 @@ import Modal from '@/components/Modal.vue';
  * Modals
  */
 	const showModal = ref(false);
+	
 </script>
