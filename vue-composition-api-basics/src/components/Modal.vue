@@ -1,12 +1,20 @@
 <template>
 	<Teleport to=".modal-container">
 			<div class="modal">
-				<h1>This is a modal!</h1>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure inventore sapiente, expedita, dolores quibusdam corporis eveniet, accusamus cumque neque unde quae reprehenderit in facilis eaque optio excepturi omnis. Totam, obcaecati?</p>
+				<h1><slot name="title"></slot></h1>
+				<slot></slot>
 				<button>Hide modal</button>
 			</div>
 	</Teleport>
 </template>
+
+<script setup>
+import { useSlots } from 'vue';
+
+const slots = useSlots();
+
+console.log(slots.title());
+</script>
 
 <style scoped>
 .modal{
