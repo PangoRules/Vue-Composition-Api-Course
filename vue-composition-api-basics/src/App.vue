@@ -10,14 +10,14 @@
 		<RouterLink to="/modals">Modals</RouterLink>
 	</nav>
 
-  <RouterView :userData="userData" />
+  <RouterView />
 </template>
 
 <script setup>
 /**
  * Imports
  */
-	import { reactive } from 'vue';
+	import { reactive, provide } from 'vue';
 
 /**
  * User data
@@ -26,7 +26,9 @@
  const userData = reactive({
 	name: 'Rafael',
 	username: 'Pango'
- })
+ });
+
+ provide('userData', userData);
 
 </script>
 

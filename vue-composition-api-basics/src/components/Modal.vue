@@ -13,6 +13,10 @@
 </template>
 
 <script setup>
+/**
+ * Imports
+ */
+	import { inject } from 'vue';
 
 /**
  * Props
@@ -25,9 +29,6 @@ const props = defineProps({
 	titleProp:{
 		type: String,
 		default: 'No title specified'
-	},
-	userData:{
-		type: Object
 	}
 });
 
@@ -35,6 +36,11 @@ const props = defineProps({
  * Emits
  */
 const emit = defineEmits(['update:modelValue']);
+
+/**
+ * userData
+ */
+ const userData = inject('userData');
 
 </script>
 
