@@ -2,7 +2,7 @@
 	<div class="modals">
 		<h1>Modals</h1>
 		<button @click="showModal = true">Show modal</button>
-		<Teleport to="body">
+		<Teleport to=".modal-container">
 			<div v-if="showModal" class="modal">
 				<h1>This is a modal!</h1>
 				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure inventore sapiente, expedita, dolores quibusdam corporis eveniet, accusamus cumque neque unde quae reprehenderit in facilis eaque optio excepturi omnis. Totam, obcaecati?</p>
