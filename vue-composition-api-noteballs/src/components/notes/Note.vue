@@ -12,13 +12,17 @@
 		</div>
 		<footer class="card-footer">
 			<a href="#" class="card-footer-item">Edit</a>
-			<a href="#" class="card-footer-item" @click.prevent="handleDeleteClicked">Delete</a>
+			<a href="#" class="card-footer-item" @click.prevent="storeNotes.deleteNote(props.note.id)">Delete</a>
 		</footer>
 	</div>
 </template>
 
 <script setup>
+/**
+ * Imports
+ */
 import { computed } from 'vue';
+import { useStoreNotes } from '@/stores/storeNotes';
 
 /**
  * Props
@@ -28,7 +32,12 @@ import { computed } from 'vue';
 			type: Object,
 			required: true
 		}
-	})
+	});
+
+	/**
+	 * Store
+	 */
+ 	const storeNotes = useStoreNotes();
 
 	/**
 	 * Note content
@@ -38,15 +47,4 @@ import { computed } from 'vue';
 
 		return `${props.note.content.length} ${description}`;
 	});
-
-	/**
-	 * Handle deleted click
-	 */
-	 const emit = defineEmits(['deleteClicked'])
-
-	 const handleDeleteClicked = () => {
-		emit('deleteClicked', props.note.id);
-	 }
-
-
 </script>

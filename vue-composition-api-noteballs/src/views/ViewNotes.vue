@@ -28,7 +28,6 @@
 			v-for="note in storeNotes.notes"
 			:key="note.id"
 			:note="note"
-			@deleteClicked="storeNotes.deleteNote"
 		/>
 	</div>
 </template>
