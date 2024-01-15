@@ -30,5 +30,5 @@ export const useStoreNotes = defineStore('storeNotes', {
 		deleteNote(noteId){
 			this.notes = this.notes.filter(note => note.id !== noteId);
 		}
-	}
+	},
 })
