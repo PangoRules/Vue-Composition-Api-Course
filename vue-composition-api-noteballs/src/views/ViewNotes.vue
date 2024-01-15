@@ -4,6 +4,8 @@
 		<AddEditNote
 			v-model="newNote"	
 			ref = "addEditNoteRef"
+			placeholder = "Add new note"
+			label = "Add new note"
 		>
 			<template #buttons>
 				<button
@@ -25,16 +27,16 @@
 
 <script setup>
 /**
- * Imports
- */
+	* Imports
+	*/
 	import { ref } from 'vue';
 	import Note from '@/components/notes/Note.vue';
 	import AddEditNote from '@/components/notes/AddEditNote.vue';
 	import { useStoreNotes } from '@/stores/storeNotes';
 
 /**
- * Store
- */
+	* Store
+	*/
 	const storeNotes = useStoreNotes();
 
 /**
