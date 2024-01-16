@@ -8,13 +8,14 @@
 				</div>
 	
 				<a
-				@click.prevent="showModalNav = !showModalNav"
+					@click.prevent="showModalNav = !showModalNav"
 					role="button"
 					class="navbar-burger"
 					:class="{'is-active':showModalNav}"
 					aria-label="menu"
 					aria-expanded="false"
-					data-target="navbarBasicExample">
+					data-target="navbarBasicExample"
+					ref="navbarBurgerRef">
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
@@ -24,7 +25,8 @@
 			<div
 				id="navbarBasicExample"
 				class="navbar-menu"
-				:class="{'is-active':showModalNav}">
+				:class="{'is-active':showModalNav}"
+				ref="navbarMenuRef">
 				<div class="navbar-end">
 					<RouterLink
 						@click="showModalNav = false" 
@@ -51,11 +53,24 @@
  * Imports
  */
 	import { ref } from 'vue';
+	import { onClickOutside } from '@vueuse/core'
 
 /**
  * Mobile nav
  */
 	const showModalNav = ref(false);
+	
+	/**
+	 * Click outside to close
+	 */
+	const navbarMenuRef = ref(null);
+	const navbarBurgerRef = ref(null);
+
+	onClickOutside(navbarMenuRef, () => {
+		showModalNav.value = false;
+	}, {
+		ignore: [navbarBurgerRef]
+	});
 </script>
 
 <style scoped>
