@@ -26,14 +26,16 @@
 				class="navbar-menu"
 				:class="{'is-active':showModalNav}">
 				<div class="navbar-end">
-					<RouterLink 
+					<RouterLink
+						@click="showModalNav = false" 
 						to="/" 
 						class="navbar-item"
 					>
 						Notes
 					</RouterLink>
-					<RouterLink 
-						to="/" 
+					<RouterLink
+						@click="showModalNav = false" 
+						to="/stats" 
 						class="navbar-item"
 					>
 						Stats
