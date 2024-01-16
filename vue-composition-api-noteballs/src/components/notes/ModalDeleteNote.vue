@@ -11,7 +11,6 @@
 			</header>
 			<section class="modal-card-body">
 				Are you sure you want to delete this note?
-				<pre>{{ modelValue }}</pre>
 			</section>
 			<footer class="modal-card-foot is-justify-content-flex-end">
 				<button
@@ -19,7 +18,7 @@
 					class="button">
 				Cancel
 				</button>
-				<button class="button is-danger">Delete</button>
+				<button class="button is-danger" @click="storeNotes.deleteNote(noteId)">Delete</button>
 			</footer>
 		</div>
 	</div>
@@ -31,6 +30,7 @@
  */
  import { onClickOutside } from '@vueuse/core';
  import { onMounted, onUnmounted, ref } from 'vue';
+ import { useStoreNotes } from '@/stores/storeNotes';
 
 /**
  * Props
@@ -39,8 +39,17 @@
 		modelValue:{
 			type: Boolean,
 			default: false
+		},
+		noteId:{
+			type: String,
+			required: true
 		}
 	});
+
+/**
+ * Store
+ */
+	const storeNotes = useStoreNotes();
 
 /**
  * Emits
