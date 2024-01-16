@@ -4,11 +4,13 @@ import { db } from '@/js/firebase';
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({ 
-		notes: []
+		notes: [],
+		notesLoaded: false
 	}),
 
 	actions: {
 		async getNotes(){
+			this.notesLoaded = false;
 			const q = query(collection(db, "notes"), orderBy('date', 'desc'));
 
 			onSnapshot(q, (querySnapshot) => {
@@ -21,6 +23,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 						});
 				});
 				this.notes = tempNotes;
+				this.notesLoaded = true;
 			});
 		},
 
