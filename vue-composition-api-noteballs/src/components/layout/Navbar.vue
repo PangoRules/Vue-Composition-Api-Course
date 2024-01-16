@@ -30,8 +30,9 @@
 				<div class="navbar-start">
 					<button
 						class="button is-small is-info mt-3 ml-3"
-						@click="storeAuth.logOutUser()">
-						Log out
+						@click="logout()"
+						v-if="storeAuth.user.id">
+						Log out {{ storeAuth.user.email }}
 					</button>
 				</div>
 
@@ -85,6 +86,14 @@
 	}, {
 		ignore: [navbarBurgerRef]
 	});
+
+/**
+ * Logout
+ */
+	const logout = () => {
+		showModalNav.value = false;
+		storeAuth.logOutUser();
+	}
 </script>
 
 <style scoped>
