@@ -25,7 +25,6 @@
  * Imports
  */
 	import { computed, reactive } from 'vue';
-	import { useStoreNotes } from '@/stores/storeNotes';
 	import ModalDeleteNote from '@/components/notes/ModalDeleteNote.vue';
 
 /**
@@ -37,11 +36,6 @@
 			required: true
 		}
 	});
-
-/**
- * Store
- */
- 	const storeNotes = useStoreNotes();
 
 /**
  * Note content
