@@ -58,8 +58,8 @@
 		noteContent.value.content = getNoteContentById.value(router.currentRoute.value.params.id);
 	});
 
-	const handleSaveClicked = () => {
-		storeNotes.updateNote(noteContent.value);
+	const handleSaveClicked = async () => {
+		await storeNotes.updateNote(noteContent.value);
 		router.push('/')
 	}
 

@@ -21,8 +21,8 @@ import { onMounted } from 'vue';
 /**
  * Mounted
  */
-	onMounted(() => {
-		storeNotes.getNotes();
+	onMounted(async () => {
+		await storeNotes.getNotes();
 	})
 
 </script>

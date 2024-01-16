@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/js/firebase';
 
 export const useStoreNotes = defineStore('storeNotes', {
@@ -11,47 +11,40 @@ export const useStoreNotes = defineStore('storeNotes', {
 		async getNotes(){
 			const q = query(collection(db, "notes"));
 
-			const querySnapshot = await getDocs(q);
-
-			querySnapshot.forEach((doc) => {
-				let note = {
-					id: doc.id,
-					content: doc.data().content
-				}
-				
-				this.notes.push(note);
+			onSnapshot(q, (querySnapshot) => {
+				let tempNotes = [];
+				querySnapshot.forEach((doc) => {
+						tempNotes.push({
+							id: doc.id,
+							content: doc.data().content
+						});
+				});
+				this.notes = tempNotes;
 			});
 		},
 
-		addNote(newNoteContent){
+		async addNote(newNoteContent){
 			let currentDate = new Date().getTime(),
 				id = currentDate.toString();
 		
 			let note = {
-				id: id,
 				content: newNoteContent
 			};
-			
-			this.notes.unshift(note);
+
+			await setDoc(doc(db, "notes", id), note);
 		},
 
-		deleteNote(noteId){
-			this.notes = this.notes.filter(note => note.id !== noteId);
+		async deleteNote(noteId){
+			await deleteDoc(doc(db, "notes", noteId));
 		},
 
-		updateNote(editedNote){
-			const index = this.notes.findIndex(note => note.id === editedNote.id);
+		async updateNote(editedNote){
+			const noteRef = doc(db, "notes", editedNote.id);
 
-			if (index !== -1) {
-				// Create a new object with the updated content
-				const updatedNote = {
-					...this.notes[index],
-					content: editedNote.content,
-				};
-
-				// Update the array with the new object
-				this.notes.splice(index, 1, updatedNote);
-			}
+			// Set the "capital" field of the city 'DC'
+			await updateDoc(noteRef, {
+				content: editedNote.content
+			});
 		}
 	},
 	getters:{

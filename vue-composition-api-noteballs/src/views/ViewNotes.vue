@@ -46,8 +46,8 @@
 	const newNote = ref('');
 	const addEditNoteRef = ref(null);
 
-	const addNote = () =>{
-		storeNotes.addNote(newNote.value);
+	const addNote = async () =>{
+		await storeNotes.addNote(newNote.value);
 		newNote.value = '';
 		addEditNoteRef.value.focusTextarea();
 	};
