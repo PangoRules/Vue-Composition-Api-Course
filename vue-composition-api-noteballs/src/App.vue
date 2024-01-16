@@ -10,19 +10,20 @@
  * Imports
  */
 	import Navbar from '@/components/layout/Navbar.vue';
-	import { useStoreNotes } from '@/stores/storeNotes';
-import { onMounted } from 'vue';
+	import { useStoreAuth } from '@/stores/storeAuth';
+	import { onMounted } from 'vue';
 
 /**
  * Store
  */
-	const storeNotes = useStoreNotes();
+	const storeAuth = useStoreAuth();
+	
 
 /**
  * Mounted
  */
 	onMounted(async () => {
-		await storeNotes.getNotes();
+		storeAuth.init();
 	})
 
 </script>

@@ -44,7 +44,7 @@
 /**
 	* Imports
 	*/
-	import { ref } from 'vue';
+	import { ref, onMounted } from 'vue';
 	import Note from '@/components/notes/Note.vue';
 	import AddEditNote from '@/components/notes/AddEditNote.vue';
 	import { useStoreNotes } from '@/stores/storeNotes';
@@ -54,6 +54,13 @@
 	* Store
 	*/
 	const storeNotes = useStoreNotes();
+
+/**
+ * Mounted
+ */
+ onMounted(async () => {
+		await storeNotes.getNotes();
+	});
 
 /**
  * Notes
