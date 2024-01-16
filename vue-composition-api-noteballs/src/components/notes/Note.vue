@@ -12,8 +12,9 @@
 		</div>
 		<footer class="card-footer">
 			<RouterLink href="#" class="card-footer-item" :to="`/editNote/${props.note.id}`">Edit</RouterLink>
-			<a href="#" class="card-footer-item" @click.prevent="storeNotes.deleteNote(props.note.id)">Delete</a>
+			<a href="#" class="card-footer-item" @click.prevent="modals.deleteNote = true">Delete</a>
 		</footer>
+		<ModalDeleteNote v-if="modals.deleteNote" />
 	</div>
 </template>
 
@@ -21,8 +22,9 @@
 /**
  * Imports
  */
-import { computed } from 'vue';
-import { useStoreNotes } from '@/stores/storeNotes';
+	import { computed, reactive } from 'vue';
+	import { useStoreNotes } from '@/stores/storeNotes';
+	import ModalDeleteNote from '@/components/notes/ModalDeleteNote.vue';
 
 /**
  * Props
@@ -34,17 +36,24 @@ import { useStoreNotes } from '@/stores/storeNotes';
 		}
 	});
 
-	/**
-	 * Store
-	 */
+/**
+ * Store
+ */
  	const storeNotes = useStoreNotes();
 
-	/**
-	 * Note content
-	 */
+/**
+ * Note content
+ */
 	const characterLength = computed(() => {
 		let description = props.note.content.length > 1 ? 'Characters' : 'Character';
 
 		return `${props.note.content.length} ${description}`;
 	});
+
+/**
+ * Modals
+ */
+	const modals = reactive({
+		deleteNote: false
+	})
 </script>
