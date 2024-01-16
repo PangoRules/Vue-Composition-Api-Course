@@ -5,13 +5,14 @@
 		<div class="card-content">
 			<div class="content">
 				{{ note.content }}
-				<div class="has-text-right has-text-grey-light mt-2">
-					<small>{{ characterLength }}</small>
+				<div class="columns is-mobile has-text-grey-light mt-2">
+					<small class="column">{{ dateFormatted }}</small>
+					<small class="column has-text-right">{{ characterLength }}</small>
 				</div>
 			</div>
 		</div>
 		<footer class="card-footer">
-			<RouterLink href="#" class="card-footer-item" :to="`/editNote/${props.note.id}`">Edit</RouterLink>
+			<RouterLink href="#" class="card-footer-item" :to="`/editNote/${note.id}`">Edit</RouterLink>
 			<a href="#" class="card-footer-item" @click.prevent="modals.deleteNote = true">Delete</a>
 		</footer>
 		<ModalDeleteNote
@@ -28,6 +29,7 @@
  */
 	import { computed, reactive } from 'vue';
 	import ModalDeleteNote from '@/components/notes/ModalDeleteNote.vue';
+	import { useDateFormat } from '@vueuse/core';
 
 /**
  * Props
@@ -46,6 +48,14 @@
 		let description = props.note.content.length > 1 ? 'Characters' : 'Character';
 
 		return `${props.note.content.length} ${description}`;
+	});
+
+	const dateFormatted = computed(() => {
+		let date = new Date(parseInt(props.note.date));
+
+		let formattedDate = useDateFormat(date, 'YYYY-MM-DD HH:mm:ss');
+
+		return formattedDate.value;
 	});
 
 /**
