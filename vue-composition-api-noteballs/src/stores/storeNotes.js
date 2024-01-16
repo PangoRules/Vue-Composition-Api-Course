@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { collection, query, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { collection, query, onSnapshot, doc, setDoc, deleteDoc, updateDoc, orderBy, limit } from 'firebase/firestore';
 import { db } from '@/js/firebase';
 
 export const useStoreNotes = defineStore('storeNotes', {
@@ -9,7 +9,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 
 	actions: {
 		async getNotes(){
-			const q = query(collection(db, "notes"));
+			const q = query(collection(db, "notes"), orderBy('id', 'desc'));
 
 			onSnapshot(q, (querySnapshot) => {
 				let tempNotes = [];
@@ -28,7 +28,8 @@ export const useStoreNotes = defineStore('storeNotes', {
 				id = currentDate.toString();
 		
 			let note = {
-				content: newNoteContent
+				content: newNoteContent,
+				id
 			};
 
 			await setDoc(doc(db, "notes", id), note);
@@ -41,7 +42,6 @@ export const useStoreNotes = defineStore('storeNotes', {
 		async updateNote(editedNote){
 			const noteRef = doc(db, "notes", editedNote.id);
 
-			// Set the "capital" field of the city 'DC'
 			await updateDoc(noteRef, {
 				content: editedNote.content
 			});
