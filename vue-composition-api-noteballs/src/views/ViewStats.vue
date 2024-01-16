@@ -50,5 +50,5 @@
 /**
  * Watch characters
  */
-	useWatchCharacters(loveNoteballs);
+	useWatchCharacters(loveNoteballs, 50);
 </script>
