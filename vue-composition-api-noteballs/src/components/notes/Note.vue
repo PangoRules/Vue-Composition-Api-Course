@@ -53,7 +53,7 @@
 	const dateFormatted = computed(() => {
 		let date = new Date(parseInt(props.note.date));
 
-		let formattedDate = useDateFormat(date, 'YYYY-MM-DD HH:mm:ss');
+		let formattedDate = useDateFormat(date, 'MM-DD-YYYY @ HH:mm');
 
 		return formattedDate.value;
 	});
