@@ -16,9 +16,41 @@
 				<div class="title has-text-centered">
 					{{ formTitle }}
 				</div>
-				<div class="content">
-					Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-				</div>
+				
+				<form
+					@submit.prevent="onSubmit"
+				>
+					<div class="field">
+						<label class="label">Email</label>
+						<div class="control">
+						<input
+								class="input"
+								type="email"
+								placeholder="e.g. alexsmith@gmail.com"
+								v-model="credentials.email">
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Password</label>
+						<div class="control">
+							<input
+								class="input"
+								type="password"
+								placeholder="Enter a password"
+								v-model="credentials.password">
+						</div>
+					</div>
+
+					<div class="field is-grouped is-grouped-right">
+						<p class="control">
+							<button class="button is-primary">
+								{{ formTitle }}
+							</button>
+						</p>
+					</div>
+				</form>			
+
 			</div>
 		</div>
 	</div>
@@ -28,7 +60,7 @@
 /**
  * Imports
  */
-	import { computed, ref } from 'vue';
+	import { computed, reactive, ref } from 'vue';
 
 /**
  * Register / login
@@ -41,6 +73,29 @@
 	const formTitle = computed(() => {
 		return register.value ? 'Register' : 'Login';
 	})
+
+/**
+ * Credentials
+ */
+	const credentials = reactive({
+		email: '',
+		password: ''
+	})
+
+/**
+ * Submit form
+ */
+	const onSubmit = () => {
+		if(!credentials.email || !credentials.password){
+			alert('Please enter an email and password!')
+		}else{
+			if(register.value){
+				console.log('Register user with these credentials', credentials)
+			}else{
+				console.log('Login user with these credentials', credentials)
+			}
+		}
+	}
 </script>
 
 <style>

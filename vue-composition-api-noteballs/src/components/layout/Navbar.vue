@@ -27,6 +27,12 @@
 				class="navbar-menu"
 				:class="{'is-active':showModalNav}"
 				ref="navbarMenuRef">
+				<div class="navbar-start">
+					<button class="button is-small is-info mt-3 ml-3">
+						Log out
+					</button>
+				</div>
+
 				<div class="navbar-end">
 					<RouterLink
 						@click="showModalNav = false" 
