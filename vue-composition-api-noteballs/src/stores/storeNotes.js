@@ -21,6 +21,10 @@ export const useStoreNotes = defineStore('storeNotes', {
 			this.getNotes();
 		},
 
+		emptyNotes(){
+			this.notes = [];
+		},
+
 		async getNotes(){
 			this.notesLoaded = false;
 
