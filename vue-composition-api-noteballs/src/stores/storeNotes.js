@@ -24,12 +24,11 @@ export const useStoreNotes = defineStore('storeNotes', {
 
 		emptyNotes(){
 			this.notes = [];
+			if(getNotesSnapshot) getNotesSnapshot(); //If there is already a snapshot present, unsubscribes from any active listener
 		},
 
 		async getNotes(){
 			this.notesLoaded = false;
-
-			if(getNotesSnapshot) getNotesSnapshot(); //If there is already a snapshot present, unsubscribes from any active listener
 
 			getNotesSnapshot = onSnapshot(notesCollectionQuery, (querySnapshot) => {
 				let tempNotes = [];
