@@ -41,6 +41,8 @@ export const useStoreNotes = defineStore('storeNotes', {
 				});
 				this.notes = tempNotes;
 				this.notesLoaded = true;
+			}, error => {
+				console.log('error.message', error.message)
 			});
 		},
 
